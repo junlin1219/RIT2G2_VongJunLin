@@ -1,0 +1,27 @@
+include Irvine32.inc
+
+.DATA
+dlist	DWORD	2,5000,6000,150000,2500,150
+result  DWORD	0
+msg	BYTE	"TOTAL : ",0
+
+.CODE
+MAIN PROC
+
+	MOV ECX, LENGTHOF dlist
+	MOV ESI, 0
+
+L1:
+	MOV EAX, dlist[esi]
+	ADD result, EAX
+	ADD ESI,4
+	LOOP L1
+
+	MOV EDX, OFFSET msg
+	CALL WRITESTRING
+	MOV EAX, result
+	CALL WRITEINT
+	CALL CRLF
+
+MAIN ENDP
+END MAIN
